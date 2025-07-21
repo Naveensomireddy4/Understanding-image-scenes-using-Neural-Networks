@@ -1,71 +1,72 @@
-# Understanding Image Scenes and Videos by Scene Graph Generation
+# 🧠 Scene Graph Generation from Images & Videos
 
-![Scene Graph Illustration](https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/SceneGraph.png/640px-SceneGraph.png)
-*Illustrative example of scene graph generation (Image source: Wikipedia)*
+This project explores **Scene Graph Generation** for better understanding of both static images and dynamic videos. We extract object-level interactions to produce meaningful triplets like:
 
-## 🔍 Overview
+> `person - holding - bottle`  
+> `laptop - on - bed`
 
-This project explores **scene graph generation** for understanding both static images and dynamic videos. By combining object detection with relationship modeling, we construct a structured graphical representation of visual scenes where:
-- **Nodes** = Objects
-- **Edges** = Relationships between objects
-
-Our architecture is based on **YOLO (You Only Look Once)** for fast and accurate object detection, followed by a relation classifier for generating scene graphs.
+By combining **YOLO** for object detection and a custom **relation classifier**, we build a structured representation of visual scenes.
 
 ---
 
-## 👩‍💻 Authors
+## 📸 What is a Scene Graph?
 
-- Randhi Nagasurya (2021ITB015)  
-- Somireddy Naveen Kumar Reddy (2021ITB085)  
-- Moru Sai Tirupathi (2021ITB086)  
+A **scene graph** is a graphical representation of a visual scene where:
+- **Nodes** = Objects (e.g., person, bottle, laptop)
+- **Edges** = Relationships (e.g., beside, holding, touching)
 
-Under the guidance of **Dr. Arindam Biswas**,  
-Dept. of Information Technology,  
-IIEST Shibpur
-
----
-
-## 📁 Dataset
-
-We use the **Panoptic Scene Graph (PSG)** dataset which provides:
-- 49,000+ images
-- 330+ types of object relationships
-- Panoptic segmentation masks
-- Triplets of the form: `<Subject, Predicate, Object>`
-
-### Dataset Components
-| Component   | Description |
-|-------------|-------------|
-| Objects     | ~15 per image with panoptic masks |
-| Relationships | ~18 triplets per image |
-| Categories  | COCO-based object classes |
-| Segmentation | Pixel-level coverage for "stuff" and "things" |
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/SceneGraph.png/640px-SceneGraph.png" width="500"/>
+  <br/><em>Illustration of a Scene Graph (Source: Wikipedia)</em>
+</p>
 
 ---
 
-## 🧠 Model Architecture
+## 🎥 Demo Snapshots
 
-### 1. **Object Detection (YOLO)**
-- **Backbone**: CSPNet
-- **Neck**: PAN-FPN
-- **Head**: Fully convolutional detection layers
-- **Post-processing**: Non-Maximum Suppression (NMS)
+| Frame | Scene Graph |
+|-------|-------------|
+| ![Frame 1](./frame1.png) | `bottle - beside - laptop`<br>`person - touching - laptop` |
+| ![Frame 2](./frame2.png) | `person - holding - bottle`<br>`person - lying on - bed`<br>`person - holding - vase` |
+| ![Frame 3](./frame3.png) | `person - holding - bottle`<br>`person - beside - person`<br>`bottle - beside - person` |
+| ![Frame 4](./frame4.png) | `laptop - in front of - person`<br>`person - beside - person`<br>`person - touching - laptop` |
+| ![Frame 6](./frame6.png) | `person - touching - laptop`<br>`bottle - beside - laptop`<br>`laptop - in front of - person` |
+| ![Frame 7](./frame7.png) | `person - holding - phone`<br>`laptop - on - bed`<br>`person - in front of - wall` |
+
+> 🔄 See [Media1.mp4](./Media1.mp4) for the full video-based scene graph generation.
+
+---
+
+## 🏗️ Architecture
+
+### 1. **Object Detection**
+- **YOLOv5 / YOLOv8**
+- Pre-trained on COCO
+- Fast and real-time inference
 
 ### 2. **Relation Prediction**
-- Combines:
-  - Visual features (via ROI Align)
-  - Spatial features (e.g., relative positions)
-  - Semantic features (GloVe embeddings)
-- Uses an MLP classifier + Softmax to generate relationship labels
+- ROI Align features for object pairs
+- Relative spatial encoding
+- Word embeddings (GloVe)
+- MLP-based relation classifier
 
 ---
 
-## 📊 Evaluation Metrics
+## 📦 Dataset
 
-- **Recall@K**: Measures how many correct triplets are in top-K predictions
-- **mean Recall@K (mR@K)**: Averaged across all relation classes (important for rare relationships)
+We used the **Panoptic Scene Graph (PSG)** dataset:
+- 49,000+ richly annotated images
+- 330+ unique relationships
+- COCO-style object categories
+- `<Subject, Predicate, Object>` triplets
 
-### Sample Results (SGDet task)
+---
+
+## 📊 Metrics
+
+We evaluate with:
+- **Recall@50, Recall@100**
+- **Mean Recall** for rare relationships
 
 | Model    | mR@50 | mR@100 |
 |----------|-------|--------|
@@ -74,28 +75,40 @@ We use the **Panoptic Scene Graph (PSG)** dataset which provides:
 | PE-NET   | 16.7  | 18.8   |
 | **Ours** | 12.4  | 14.5   |
 
-> 🔧 Although our performance lags slightly behind PE-Net, our model is much faster and optimized for **real-time video processing**.
+> ⚡ Our model is real-time optimized and suitable for video understanding.
 
 ---
 
-## 🚀 Future Work
+## 🧠 Applications
 
-- **Person-Centric Action Recognition**: Extend the system to detect and describe individual actions in videos (e.g., "Person X is picking up an object").
-- **Real-Time Video Analytics**: Deploy for surveillance, smart monitoring, or interactive robotics.
-
----
-
-## 🛠️ Requirements
-
-- Python ≥ 3.8  
-- PyTorch ≥ 1.10  
-- YOLOv5 or YOLOv8 implementation (Ultralytics recommended)  
-- COCO / PSG Dataset  
-- GloVe embeddings  
+- **Surveillance & Monitoring**: Detect interactions in live feed
+- **Human-Robot Interaction**: Understand commands via visual context
+- **Video Captioning / Summarization**
+- **Augmented Reality Anchors**
 
 ---
 
-## 📦 Installation
+## 🔮 Future Work
+
+- ✅ Action understanding: e.g., "Person is picking up bottle"
+- ✅ Tracking across frames for temporal graphs
+- 🚧 Integrate large vision-language models for open-world relationships
+
+---
+
+## 👨‍💻 Contributors
+
+- Randhi Nagasurya (2021ITB015)  
+- Somireddy Naveen Kumar Reddy (2021ITB085)  
+- Moru Sai Tirupathi (2021ITB086)  
+
+Under the guidance of **Dr. Arindam Biswas**,  
+Department of Information Technology,  
+**IIEST Shibpur**
+
+---
+
+## ⚙️ Installation
 
 ```bash
 git clone https://github.com/<your-username>/scene-graph-generator.git
