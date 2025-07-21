@@ -20,6 +20,46 @@ A **scene graph** is a graphical representation of a visual scene where:
   <br/><em>Illustration of a Scene Graph (Source: Wikipedia)</em>
 </p>
 
+
+# 🧠 Scene Graph Generation from Images & Videos
+
+This project explores **Scene Graph Generation** for better understanding of both static images and dynamic videos. We extract object-level interactions to produce meaningful triplets like:
+
+> `person - holding - bottle`  
+> `laptop - on - bed`
+
+By combining **YOLO** for object detection and a custom **relation classifier**, we build a structured representation of visual scenes.
+
+---
+
+## 📸 What is a Scene Graph?
+
+A **scene graph** is a graphical representation of a visual scene where:
+- **Nodes** = Objects (e.g., person, bottle, laptop)
+- **Edges** = Relationships (e.g., beside, holding, touching)
+
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/SceneGraph.png/640px-Scenegraph.png" width="500"/>
+  <br/><em>Illustration of a Scene Graph (Source: Wikipedia)</em>
+</p>
+
+---
+
+## 🔍 Case Study: Dining Table Scene
+
+### Input Image
+<p align="center">
+  <img src="./test_image.png" width="500"/>
+  <br/><em>A collaborative workspace scene with multiple people around a dining table</em>
+</p>
+
+### Detection Output
+<p align="center">
+  <img src="./test_image_output.png" width="500"/>
+  <br/><em>YOLO detection with bounding boxes identifying objects and their spatial relationships</em>
+</p>
+
+### Extracted Scene Graph
 ---
 
 ## 🎥 Demo Snapshots
