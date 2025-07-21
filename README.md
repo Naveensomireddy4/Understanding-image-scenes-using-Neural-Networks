@@ -39,7 +39,7 @@ A **scene graph** is a graphical representation of a visual scene where:
 - **Edges** = Relationships (e.g., beside, holding, touching)
 
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/SceneGraph.png/640px-Scenegraph.png" width="500"/>
+  <img src="./scene_graph.png" width="500"/>
   <br/><em>Illustration of a Scene Graph (Source: Wikipedia)</em>
 </p>
 
