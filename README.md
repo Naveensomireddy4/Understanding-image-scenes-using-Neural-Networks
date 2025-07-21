@@ -58,6 +58,11 @@ A **scene graph** is a graphical representation of a visual scene where:
   <img src="./test_image_output.png" width="500"/>
   <br/><em>YOLO detection with bounding boxes identifying objects and their spatial relationships</em>
 </p>
+### Transcript for the Output
+<p align="center">
+  <img src="./transcript" width="500"/>
+  <br/><em>YOLO detection with bounding boxes identifying objects and their spatial relationships</em>
+</p>
 
 ### Extracted Scene Graph
 ---
