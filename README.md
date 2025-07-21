@@ -106,49 +106,110 @@ We used the **Panoptic Scene Graph (PSG)** dataset:
 - `<Subject, Predicate, Object>` triplets
 
 ---
+# 🏗️ Scene Graph Generation from Images & Videos
 
-## 📊 Metrics
+## 🔧 Core Approach: Hierarchical Scene Graph Generation
 
-We evaluate with:
-- **Recall@50, Recall@100**
-- **Mean Recall** for rare relationships
-
-| Model    | mR@50 | mR@100 |
-|----------|-------|--------|
-| Motifs   | 6.6   | 7.9    |
-| VCTree   | 5.8   | 6.6    |
-| PE-NET   | 16.7  | 18.8   |
-| **Ours** | 12.4  | 14.5   |
-
-> ⚡ Our model is real-time optimized and suitable for video understanding.
+Our pipeline combines efficient object detection (**YOLO**) with **relation-aware feature fusion** to generate structured scene graphs optimized for **real-time inference**.
 
 ---
 
-## 🧠 Applications
+## 📌 1. Object Detection & Feature Extraction
 
-- **Surveillance & Monitoring**: Detect interactions in live feed
-- **Human-Robot Interaction**: Understand commands via visual context
-- **Video Captioning / Summarization**
-- **Augmented Reality Anchors**
+### 🔹 Backbone: CSPNet (YOLOv5)
+- C1–C5 layers extract features at multiple scales  
+- CSPNet boosts efficiency by preserving gradients and reducing computation
+
+### 🔹 Neck: PAN-FPN
+- Combines low-level + high-level features across scales (P3–P5)
+
+### 🔹 Detection Head
+- Predicts bounding boxes, objectness scores, and class labels  
+- Applies **Non-Maximum Suppression (NMS)** to filter redundant boxes
+
+---
+
+## 🧠 2. Spatial & Visual Feature Encoding
+
+### 🟩 ROI Align
+- Extracts fixed-size object-aligned visual features with bilinear interpolation
+
+### 🟦 Spatial Features
+- Encodes geometry (center x, y, width, height) into an **8D vector**
+
+---
+
+## 🔁 3. Relation Prediction
+
+### 🔸 Feature Fusion
+- Combines:
+  - Visual Features (ROI Align)
+  - Spatial Features
+  - Semantic Embeddings (GloVe)
+- Example:  
+  `f = [GloVe("person"); GloVe("horse"); spatial_encoding]`
+
+### 🔸 MLP Classifier + Softmax
+- Predicts relation from fused features  
+  _e.g., "riding", "next to", "touching"_
+
+### 🔸 Semantic Prior Filtering
+- Filters implausible object pairs using **cosine similarity** on GloVe vectors
+
+---
+
+## 📦 Dataset: Panoptic Scene Graph (PSG)
+
+- 49,000+ images with instance + panoptic segmentation  
+- **133 object classes**, **56 relationship types**  
+- Ground truth triplets of the form: `<Subject, Predicate, Object>`
+
+---
+
+## 📊 Performance & Evaluation
+
+We evaluate using:
+
+- **Recall@50**, **Recall@100**
+- **mean Recall (mR@K)** — important for rare relations
+
+| Model   | mR@50 | mR@100 | FPS | Backbone      |
+|---------|-------|--------|-----|----------------|
+| Motifs  | 6.6   | 7.9    | ~5  | Faster R-CNN   |
+| VCTree  | 5.8   | 6.6    | ~4  | Faster R-CNN   |
+| PE-NET  | 16.7  | 18.8   | ~3  | Faster R-CNN   |
+| **Ours**| 12.4  | 14.5   | ~30 | YOLO (v5/v8)    |
+
+> ⚡ While mR@K is slightly lower, our method is **6–10× faster**, making it ideal for **real-time video scene graph generation (SGG)**.
+
+---
+
+## 🌐 Applications
+
+- 🎥 **Video Surveillance** — Understand interactions like _"person picks up bag"_
+- 🤖 **Human-Robot Interaction** — Ground language in visual context
+- 🕶️ **AR Anchors & Smart Glasses** — Detect _“person near laptop”_ in real-time
+- 📹 **Video Captioning / Summarization**
 
 ---
 
 ## 🔮 Future Work
 
-- ✅ Action understanding: e.g., "Person is picking up bottle"
-- ✅ Tracking across frames for temporal graphs
-- 🚧 Integrate large vision-language models for open-world relationships
+- ✅ **Action Recognition**: e.g., _"Person is drinking from bottle"_
+- ✅ **Temporal Graphs**: Link object interactions across video frames
+- 🚧 **Open-World SGG**: Integrate **CLIP / Vision-Language Models (VLMs)** to generalize beyond dataset constraints
 
 ---
 
 ## 👨‍💻 Contributors
 
-- Randhi Nagasurya (2021ITB015)  
-- Somireddy Naveen Kumar Reddy (2021ITB085)  
-- Moru Sai Tirupathi (2021ITB086)  
+- **Randhi Nagasurya** (2021ITB015)  
+- **Somireddy Naveen Kumar Reddy** (2021ITB085)  
+- **Moru Sai Tirupathi** (2021ITB086)
 
-Under the guidance of **Dr. Arindam Biswas**,  
-Department of Information Technology,  
+Under the guidance of  
+**Dr. Arindam Biswas**  
+Department of Information Technology  
 **IIEST Shibpur**
 
 ---
