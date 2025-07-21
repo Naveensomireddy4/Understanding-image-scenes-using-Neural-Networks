@@ -17,7 +17,7 @@ A **scene graph** is a graphical representation of a visual scene where:
 
 <p align="center">
   <img src="./image.png" width="500"/>
-  <br/><em>Illustration of a Scene Graph (Source: Wikipedia)</em>
+  <br/><em>Illustration of a Scene Graph (Source: Google)</em>
 </p>
 
 
@@ -40,7 +40,7 @@ A **scene graph** is a graphical representation of a visual scene where:
 
 <p align="center">
   <img src="./scene_graph.png" width="500"/>
-  <br/><em>Illustration of a Scene Graph (Source: Wikipedia)</em>
+  <br/><em>Illustration of a Scene Graph (Source: Google)</em>
 </p>
 
 ---
