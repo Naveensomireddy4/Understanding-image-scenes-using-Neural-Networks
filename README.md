@@ -96,16 +96,6 @@ A **scene graph** is a graphical representation of a visual scene where:
 - MLP-based relation classifier
 
 ---
-
-## 📦 Dataset
-
-We used the **Panoptic Scene Graph (PSG)** dataset:
-- 49,000+ richly annotated images
-- 330+ unique relationships
-- COCO-style object categories
-- `<Subject, Predicate, Object>` triplets
-
----
 # 🏗️ Scene Graph Generation from Images & Videos
 
 ## 🔧 Core Approach: Hierarchical Scene Graph Generation
@@ -214,9 +204,3 @@ Department of Information Technology
 
 ---
 
-## ⚙️ Installation
-
-```bash
-git clone https://github.com/<your-username>/scene-graph-generator.git
-cd scene-graph-generator
-pip install -r requirements.txt
