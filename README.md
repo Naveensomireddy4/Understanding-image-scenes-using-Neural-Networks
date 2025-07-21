@@ -196,9 +196,9 @@ We evaluate using:
 
 ## 👨‍💻 Contributors
 
-- [**Randhi Nagasurya** (2021ITB015)](https://github.com/Nagasurya-Randhi)  
-- [**Somireddy Naveen Kumar Reddy** (2021ITB085)](https://github.com/Naveensomireddy4)  
-- [**Moru Sai Tirupathi** (2021ITB086)](https://github.com/Bobby441)  
+- [**Randhi Nagasurya**](https://github.com/Nagasurya-Randhi)  
+- [**Somireddy Naveen Kumar Reddy** ](https://github.com/Naveensomireddy4)  
+- [**Moru Sai Tirupathi** ](https://github.com/Bobby441)  
 
 Under the guidance of  
 **Dr. Arindam Biswas**  
