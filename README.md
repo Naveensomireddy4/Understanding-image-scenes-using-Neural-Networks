@@ -75,6 +75,7 @@ A **scene graph** is a graphical representation of a visual scene where:
 | ![Frame 2](./frame2.png) | `person - holding - bottle`<br>`person - lying on - bed`<br>`person - holding - vase` |
 | ![Frame 3](./frame3.png) | `person - holding - bottle`<br>`person - beside - person`<br>`bottle - beside - person` |
 | ![Frame 4](./frame4.png) | `laptop - in front of - person`<br>`person - beside - person`<br>`person - touching - laptop` |
+| ![Frame 4](./frame5.png) | `laptop - in front of - person`<br>`person - beside - person`<br>`person - touching - laptop` |
 | ![Frame 6](./frame6.png) | `person - touching - laptop`<br>`bottle - beside - laptop`<br>`laptop - in front of - person` |
 | ![Frame 7](./frame7.png) | `person - holding - phone`<br>`laptop - on - bed`<br>`person - in front of - wall` |
 
